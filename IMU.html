@@ -1,0 +1,79 @@
+<!DOCTYPE html >
+<html lang="en">
+ 
+<head>
+    <meta charset="utf-8">
+
+	<title>IMU</title>
+</head>
+
+<body>
+	<p>
+        Gyroscope is <b><span id="GyroSupported">not</span></b> supported.
+    </p>
+
+	<p>
+        <b>alpha:</b> <span id="alpha"></span><br>
+        <b>beta:</b> <span id="beta"></span><br>
+        <b>gamma:</b> <span id="gamma"></span><br>
+    </p>
+
+	<p>
+        Accelerometer is <b><span id="AccSupported">not</span></b> supported.
+    </p>
+
+	
+	<p>
+        <b>Ax:</b> <span id="accx"></span><br>
+        <b>Ay:</b> <span id="accy"></span><br>
+        <b>Az:</b> <span id="accz"></span><br>
+    </p>
+
+	
+</body>
+
+
+<script type="text/javascript">
+
+		
+
+		var alpha = document.getElementById("alpha");
+		var beta = document.getElementById("beta");
+		var gamma = document.getElementById("gamma");
+
+		var ax = document.getElementById("accx");
+		var ay = document.getElementById("accy");
+		var az = document.getElementById("accz");
+
+		
+		
+		if (window.DeviceOrientationEvent) {
+			window.addEventListener('deviceorientation', deviceOrientationHandler, true);
+			document.getElementById("GyroSupported").innerText = "";
+		}
+			
+		if (window.DeviceMotionEvent) {
+			window.addEventListener("devicemotion", handleMotionEvent, true);
+			document.getElementById("AccSupported").innerText = "";
+		}
+		
+
+		function deviceOrientationHandler(evt) {
+		
+			alpha.innerText = evt.alpha.toFixed(3);
+			beta.innerText = evt.beta.toFixed(3);
+			gamma.innerText = evt.gamma.toFixed(3);
+			
+		}	
+			
+		function handleMotionEvent(event) {
+			ax.innerText = event.accelerationIncludingGravity.x.toFixed(3);
+			ay.innerText = event.accelerationIncludingGravity.y.toFixed(3);
+			az.innerText = event.accelerationIncludingGravity.z.toFixed(3);
+		}
+
+
+</script>
+
+
+</html>
